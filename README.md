@@ -19,7 +19,7 @@ UPNVJT Sigap dibuat untuk membantu pengelolaan layanan bantuan antar mahasiswa d
 
 - Flutter
 - Dart
-- MySQL sebagairancangan database/PDM
+- MySQL sebagai rancangan database/PDM
 
 ## Cara Menjalankan Aplikasi
 
@@ -36,6 +36,7 @@ Pastikan Flutter SDK sudah terpasang dan `flutter doctor` tidak menunjukkan masa
 Untuk mencoba Aplikasi sebagai Admin, gunakan akun berikut:
 **Email:** `sultan@email.com`
 **Password:** `admin123`
+
 Akun demo digunakan untuk mencoba alur aplikasi tanpa perlu membuat akun admin terlebih dahulu. Form login diisi dengan akun demo tersebut saat pertama kali dibuka. 
 
 ## Ekspor CSV
@@ -105,6 +106,7 @@ Pemetaan antara fitur aplikasi dan tabel dapat dilihat pada file: `PDM_MAPPING.m
 Project UPNVJT Sigap dikembangkan sebagai project kelompok untuk mata kuliah Pemrograman Desktop
 
 | Nama | NPM | Peran |
+|---|---|---|
 | Meutia Zaini Siregar | 25082010199 | Captain |
 | Zaskia Syakira Nazahrani | 25082010206 | Hustler |
 | Aprilia Tri Jayanti A. | 25082010221 | Hipster |
