@@ -1,24 +1,33 @@
 # UPNVJT SIGAP — Aplikasi Desktop Admin (Flutter)
 
-Aplikasi desktop untuk administrasi layanan bantuan antar mahasiswa UPN "Veteran" Jawa Timur.
-Fitur UI mengikuti alur tugas Pemrograman Desktop Episode 6: login, registrasi, CRUD master data,
-profil, dan logout. Struktur model mengikuti PDM SIGAP: `users`, `kategori_layanan`, `pesanan`,
-`negosiasi`, `ulasan`, dan `transaksi_keuangan`.
+UPNVJT Sigap dibuat untuk membantu pengelolaan layanan bantuan antar mahasiswa di Universitas Pembangunan Nasional "Veteran" Jawa Timur. Merupakan pengembangan dari layanan UPNVJT Sigap yang sebelumnya masih dilakukan melalui chat. Dengan ini, proses pengelolaan data dan pesanan dibuat lebih terstruktur sehingga admin dapat mengelola pengguna, kategori layanan, pesanan, transaksi, dan data lainnya menjadi satu. 
 
 ## Fitur yang tersedia
 
-- Login Admin (panel desktop dibatasi untuk role Admin). Kata sandi bisa dilihat/disembunyikan lewat ikon mata.
-- Registrasi mandiri **hanya untuk Pelanggan**. Akun **Kru hanya dapat didaftarkan oleh Admin** lewat Master Pengguna (jadwal KRS wajib diisi).
-- Dashboard statistik pesanan, pengguna, kategori, dan transaksi.
-- CRUD master kategori layanan, termasuk kategori tetap **Lainnya (Request)** untuk permintaan layanan di luar daftar.
-- CRUD master pengguna.
+- **Login Admin:** Untuk masuk ke halaman utama aplikasi (panel desktop dibatasi untuk role Admin). Kata sandi bisa dilihat dan disembunyikan melalui ikon mata.
+- **Registrasi Pelanggan:** Untuk membuat akun baru.
+- **Dashboard:** Untuk melihat ringkasan data pengguna, pesanan, kategori layanan, dan transaksi.
+- **Master Kategori Layanan:** Untuk menambah, mengubah, menghapus, dan melihat kategori layanan.
+- **Master Pengguna:** Untuk mengelola data pelanggan dan kru. Akun Kru hanya dapat didaftarkan oleh Admin lewat Master Pengguna (jadwal KRS wajib diisi).
+- **Master Pesanan:** Untuk melihat dan mengelola pesanan yang masuk.
+- **Negoisasi Harga:** Untuk pesanan dengan layanan khusus yang menggunakan harga negoisasi.
+- **Laporan Transaksi:** Untuk melihat data transaksi dan komisi.
+- **Profil Admin:** Untuk mengubahh data profil dan kata sandi.
+- **Logout:** Untuk keluar dari akun dan kembali ke halaman login.
+
+ 
+
 - Kelola status dan ubah data pesanan (pesanan dibuat pelanggan, tidak ditambah dari panel admin). Pilihan kru menampilkan status **Free/Sibuk**; kru yang masih menangani pesanan Diambil/Sedang Dikerjakan tidak bisa dipilih untuk pesanan lain. Termasuk **negosiasi harga** per pesanan (ikon Negosiasi).
 - Laporan transaksi/komisi admin dan **ekspor CSV (teks yang bisa disalin)**; ekspor kategori juga berupa teks CSV.
 - Kolom **Cari** di setiap tab punya petunjuk kolom yang dicari, tombol hapus, dan info jumlah hasil.
-- Profil admin, ubah data profil dan kata sandi.
-- Logout kembali ke halaman login.
 
-## Cara menjalankan di Windows
+## Teknologi yang digunakan
+
+- Flutter
+- Dart
+- MySQL sebagairancangan database/PDM
+
+## Cara Menjalankan Aplikasi
 
 Pastikan Flutter SDK sudah terpasang dan `flutter doctor` tidak menunjukkan masalah untuk Windows desktop.
 
@@ -28,46 +37,37 @@ Pastikan Flutter SDK sudah terpasang dan `flutter doctor` tidak menunjukkan masa
 4. Jalankan `flutter pub get`.
 5. Jalankan `flutter run -d windows`.
 
-Gunakan jendela desktop sekitar 1200 × 720 atau lebih besar agar tabel nyaman dibaca.
+## Akun Demo
+
+Untuk mencoba Aplikasi sebagai Admin, gunakan akun berikut:
+**Email:** `sultan@email.com`
+**Password:** `admin123`
+Akun demo digunakan untuk mencoba alur aplikasi tanpa perlu membuat akun admin terlebih dahulu. Form login diisi dengan akun demo tersebut saat pertama kali dibuka. 
 
 ## Ekspor CSV
 
 Tombol Ekspor (Master Kategori) dan Ekspor CSV (Laporan Keuangan) menampilkan data dalam bentuk teks CSV
 di dialog. Klik **Salin CSV**, lalu tempel ke Excel atau simpan sebagai berkas `.csv`.
 
-## Negosiasi harga
+## Fitur Negosiasi Harga
 
-Berlaku untuk kategori bertipe harga **Negosiasi** (Pindahan Kos, Jasa Khusus, Lainnya).
+Beberapa layanan pada UPNVJT Sigap menggunakan sistem harga negoisasi. Admin dapat mencatat proses tawar-menawar harga melalui menu negoisasi pesanan. Berlaku untuk kategori bertipe harga **Negosiasi** (Pindahan Kos, Jasa Khusus, Lainnya).
 
+**Alur:**
 1. Buka Master Pesanan, klik ikon **Negosiasi** (gelembung chat) pada pesanan.
 2. Pelanggan atau kru mengajukan harga tawar (dicatat admin pada form).
 3. Pihak lawan **Terima & sepakati**, **Tolak**, atau **Tawar ulang** (tawar ulang otomatis menolak tawaran yang masih menunggu).
-4. Tawaran yang diterima menjadi harga final pesanan (`estimasi_biaya`) dan dasar komisi 8%.
-   Bila tawaran diterima berasal dari kru, kru tersebut otomatis memegang pesanan (status Diambil).
+4. Tawaran yang diterima menjadi harga final pesanan (`estimasi_biaya`). Bila tawaran diterima berasal dari kru, kru tersebut otomatis memegang pesanan (status Diambil).
 
-Kolom Estimasi di Master Pesanan menampilkan status negosiasi (disepakati / menunggu / belum ada),
-dan ada pengingat jumlah tawaran yang menunggu keputusan.
+Kolom Estimasi di Master Pesanan menampilkan status negosiasi (disepakati / menunggu / belum ada), dan ada pengingat jumlah tawaran yang menunggu keputusan.
 
 ## Kategori "Lainnya (Request)"
 
-Kategori tetap bertipe Negosiasi untuk layanan di luar matriks kategori. Pada form pesanan,
-kolom detail berubah menjadi **Layanan yang diminta pelanggan** dan wajib diisi. Kategori ini tidak bisa
-dihapus, namanya harus tetap diawali "Lainnya", dan tipe harganya harus Negosiasi.
+Menyediakan kategori **Lainnya (Request)** untuk permintaan layanan yang belum tersedia pada daftar kategori. Pada form pesanan, kolom detail berubah menjadi **Layanan yang diminta pelanggan** dan wajib diisi. 
 
-## Akun demo untuk menguji alur Admin
+Pada kategori ini, pelanggan dapat memberikan detail layanan yang ingin diminta. Karena jenis layanan dan harganya berbeda-beda, kategori ini menggunakan sistem harga negoisasi.
 
-- Email: `sultan@email.com`
-- Kata sandi: `admin123`
-
-Form login diisi dengan akun demo tersebut saat pertama kali dibuka. Data demo dibuat otomatis setiap aplikasi dijalankan ulang.
-
-## Catatan penting tentang database
-
-**Skema MySQL tidak diubah oleh proyek ini.** Model aplikasi mengacu pada kolom PDM yang sudah ada. Namun, versi ZIP ini masih menggunakan `AppStore` berbasis memori (`lib/data/app_store.dart`), bukan koneksi MySQL aktif. Artinya, CRUD dan login bisa diuji sebagai demonstrasi UI, tetapi perubahan data tidak akan tersimpan ke database MySQL dan akan kembali ke data demo setelah aplikasi ditutup.
-
-Jangan menganggap login demo sebagai autentikasi database. Untuk mengaktifkan koneksi ke database yang sudah ada, lapisan `AppStore` perlu diganti dengan repository/API yang menjalankan query ke tabel PDM tanpa mengubah skema. Koneksi MySQL desktop langsung dengan kredensial `root` tidak disarankan untuk distribusi aplikasi.
-
-## Pemetaan model ke PDM
+## Pemetaan Database
 
 | Model aplikasi | Tabel PDM | Keterangan |
 |---|---|---|
@@ -75,12 +75,9 @@ Jangan menganggap login demo sebagai autentikasi database. Untuk mengaktifkan ko
 | `KategoriLayanan` | `kategori_layanan` | nama kategori dan tarif dasar per km |
 | `Pesanan` | `pesanan` | pelanggan, kru, kategori, lokasi, waktu, biaya, status |
 | `Negosiasi` | `negosiasi` | tawaran harga, pengirim, status tawaran |
-| `Ulasan` | `ulasan` | rating dan komentar pesanan |
 | `TransaksiKeuangan` | `transaksi_keuangan` | total bayar, komisi admin, pendapatan kru |
 
-Catatan PDM: deskripsi dan warna kategori pada UI hanya untuk presentasi; keduanya bukan kolom pada PDM yang dikirim. Nilai tersebut tidak boleh dianggap tersimpan di MySQL.
-
-## Struktur folder
+## Struktur Project
 
 ```text
 lib/
@@ -99,12 +96,28 @@ lib/
   pages/profil_page.dart
 ```
 
-## Checklist sebelum UTS
+## Dokumentasi PDM
 
-- [ ] Jalankan `flutter pub get`.
-- [ ] Jalankan `flutter analyze`.
-- [ ] Jalankan aplikasi desktop.
-- [ ] Tes login admin dengan akun demo di atas.
-- [ ] Tes menu kategori, pengguna, pesanan, laporan, profil, dan logout.
-- [ ] Tes kolom Cari di tiap tab, ikon mata pada kata sandi, ekspor CSV, status kru Free/Sibuk, dan negosiasi.
-- [ ] Jika dosen mewajibkan data benar-benar tersimpan ke MySQL, integrasi repository/API harus diselesaikan dan diuji terhadap database yang digunakan.
+Pemetaan antara fitur aplikasi dan tabel dapat dilihat pada file: `PDM_MAPPING.md`
+
+## Catatan 
+
+ Untuk versi project saat ini, data aplikasi masih menggunakan penyimpanan sementara melalui `AppStore` sehingga perubahan data hanya digunakan untuk kebutuhan demonstrasi aplikasi.
+
+ Struktur model dan nama tabel tetap disesuaikan dengan PDM yang telah dibuat. Integrasi langsung dengan database MySQL dapat dikembangkan lebih lanjut menggunakan repository ayau API.
+
+
+
+ Model aplikasi mengacu pada kolom PDM yang sudah ada. Namun, versi ZIP ini masih menggunakan `AppStore` berbasis memori (`lib/data/app_store.dart`), bukan koneksi MySQL aktif. Artinya, CRUD dan login bisa diuji sebagai demonstrasi UI, tetapi perubahan data tidak akan tersimpan ke database MySQL dan akan kembali ke data demo setelah aplikasi ditutup.
+
+Jangan menganggap login demo sebagai autentikasi database. Untuk mengaktifkan koneksi ke database yang sudah ada, lapisan `AppStore` perlu diganti dengan repository/API yang menjalankan query ke tabel PDM tanpa mengubah skema. Koneksi MySQL desktop langsung dengan kredensial `root` tidak disarankan untuk distribusi aplikasi.
+
+## Tim Pengembang
+
+Project UPNVJT Sigap dikembangkan sebagai project kelompok untuk mata kuliah Pemrograman Desktop
+
+| Nama | NPM | Peran |
+| Meutia Zaini Siregar | 25082010199 | Captain |
+| Zaskia Syakira Nazahrani | 25082010206 | Hustler |
+| Aprilia Tri Jayanti A. | 25082010221 | Hipster |
+| Anggie Ayu Ramadhani | 25082010225 | Hacker |
