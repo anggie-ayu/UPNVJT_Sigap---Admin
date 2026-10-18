@@ -15,12 +15,6 @@ UPNVJT Sigap dibuat untuk membantu pengelolaan layanan bantuan antar mahasiswa d
 - **Profil Admin:** Untuk mengubahh data profil dan kata sandi.
 - **Logout:** Untuk keluar dari akun dan kembali ke halaman login.
 
- 
-
-- Kelola status dan ubah data pesanan (pesanan dibuat pelanggan, tidak ditambah dari panel admin). Pilihan kru menampilkan status **Free/Sibuk**; kru yang masih menangani pesanan Diambil/Sedang Dikerjakan tidak bisa dipilih untuk pesanan lain. Termasuk **negosiasi harga** per pesanan (ikon Negosiasi).
-- Laporan transaksi/komisi admin dan **ekspor CSV (teks yang bisa disalin)**; ekspor kategori juga berupa teks CSV.
-- Kolom **Cari** di setiap tab punya petunjuk kolom yang dicari, tombol hapus, dan info jumlah hasil.
-
 ## Teknologi yang digunakan
 
 - Flutter
@@ -105,12 +99,6 @@ Pemetaan antara fitur aplikasi dan tabel dapat dilihat pada file: `PDM_MAPPING.m
  Untuk versi project saat ini, data aplikasi masih menggunakan penyimpanan sementara melalui `AppStore` sehingga perubahan data hanya digunakan untuk kebutuhan demonstrasi aplikasi.
 
  Struktur model dan nama tabel tetap disesuaikan dengan PDM yang telah dibuat. Integrasi langsung dengan database MySQL dapat dikembangkan lebih lanjut menggunakan repository ayau API.
-
-
-
- Model aplikasi mengacu pada kolom PDM yang sudah ada. Namun, versi ZIP ini masih menggunakan `AppStore` berbasis memori (`lib/data/app_store.dart`), bukan koneksi MySQL aktif. Artinya, CRUD dan login bisa diuji sebagai demonstrasi UI, tetapi perubahan data tidak akan tersimpan ke database MySQL dan akan kembali ke data demo setelah aplikasi ditutup.
-
-Jangan menganggap login demo sebagai autentikasi database. Untuk mengaktifkan koneksi ke database yang sudah ada, lapisan `AppStore` perlu diganti dengan repository/API yang menjalankan query ke tabel PDM tanpa mengubah skema. Koneksi MySQL desktop langsung dengan kredensial `root` tidak disarankan untuk distribusi aplikasi.
 
 ## Tim Pengembang
 
